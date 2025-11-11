@@ -5,7 +5,7 @@ from wandb.integration.sb3 import WandbCallback
 
 config = {
     "policy_type": "MlpPolicy",
-    "env_id": "LunarLander-v2",
+    "env_id": "LunarLander-v3",
     "total_timesteps": 100000,
     "learning_rate": 0.0003,
     "n_steps": 2048,
