@@ -9,6 +9,7 @@ from dataclasses import dataclass
 @dataclass
 class Args:
     model_path: str
+    num_episodes: int = 5
 
 
 
@@ -29,7 +30,7 @@ def main():
     print(f"Successfully loaded model. Creating environment: {env_id}")
     env = gym.make(env_id, render_mode='human')
 
-    for episode in range(5):
+    for episode in range(args.num_episodes):
         print(f"Starting evaluation episode {episode + 1}/5")
         obs, info = env.reset()
         
