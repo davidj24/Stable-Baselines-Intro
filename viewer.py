@@ -3,24 +3,30 @@ from stable_baselines3 import PPO
 import json
 import time
 import tyro
+from dataclasses import dataclass
 
 
 @dataclass
 class Args:
     model_path: str
 
-    
+
 
 def main():
     print(f"Loading model from: {args.model_path}")
     SPEED_MULTIPLIER = 1.0
 
-    model = PPO.load(args.model_path)
-    env_id = model.env.unwrapped.spec.id
+    try:
+        model = PPO.load(args.model_path)
+        env_id = "LunarLander-v3"
+    except Exception as e:
+        print(f"Error: Couldn't load model from {args.model_path}")
+        print(f"Full error is: {e}")
+        exit()
 
 
 
-    print("Successfully loaded model. Creating environment: {env_id}")
+    print(f"Successfully loaded model. Creating environment: {env_id}")
     env = gym.make(env_id, render_mode='human')
 
     for episode in range(5):
@@ -28,7 +34,8 @@ def main():
         obs, info = env.reset()
         
         while True:
-            action, _states = model.predict(obs, deterministic=True)
+            action_arr, _states = model.predict(obs, deterministic=True)
+            action = int(action_arr)
             obs, reward, terminated, truncated, info = env.step(action)
 
             if terminated or truncated:
