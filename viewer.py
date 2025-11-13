@@ -13,7 +13,7 @@ class Args:
 
 
 
-def main():
+def main(args: Args):
     print(f"Loading model from: {args.model_path}")
     SPEED_MULTIPLIER = 1.0
 
@@ -31,7 +31,7 @@ def main():
     env = gym.make(env_id, render_mode='human')
 
     for episode in range(args.num_episodes):
-        print(f"Starting evaluation episode {episode + 1}/5")
+        print(f"Starting evaluation episode {episode + 1}/{args.num_episodes}")
         obs, info = env.reset()
         
         while True:
@@ -52,4 +52,4 @@ def main():
 
 if __name__ == '__main__':
     args = tyro.cli(Args)
-    main()
+    main(args)

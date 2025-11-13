@@ -52,9 +52,8 @@ class LiveViewerCallback(BaseCallback):
 
             command = [
                 sys.executable,
-                "viewer.py",
-                "--model-path",
-                path
+                "viewer.py", "--model-path", path,
+                "--num-episodes", "3"
             ]
 
 
