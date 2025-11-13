@@ -11,3 +11,4 @@ wandb_logs/
 runs/
 *.zip
 *.json
+*.log
